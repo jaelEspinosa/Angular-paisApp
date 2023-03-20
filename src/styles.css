@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-.menu{
-  cursor: pointer;
+body{
+  background-color: rgb(228, 220, 220);
 }
+
