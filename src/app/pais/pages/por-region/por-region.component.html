@@ -1,1 +1,44 @@
-<p>por-region works!</p>
+<h3>Buscar por region: <small>{{activeRegion | titlecase}}</small></h3>
+<hr>
+
+<!-- una forma de poner una clase condicional:
+! [class.btn-primary]="region === activeRegion",
+aunque para este ejemplo no nos sirve por que
+añade una clase pero no quita otra
+De esta forma elijo una clase u otra en funcion del valor
+de la variable.
+
+[ngClass]="{
+        'btn-primary': region === activeRegion,
+        'btn-outline-primary' : region !== activeRegion
+      }"
+y esta manera es definitivamente la mas limpia y corta:
+    [class]="(region === activeRegion) ? 'btn btn-primary':'btn btn-outline-primary'"
+  con un ternario como hacemos en React
+!por ultimo la mejor opcion es transladar el ternario al archivo .ts en un metodo
+!  y aqui lo llamamos:
+
+  getClaseCSS (region: string){
+  return region === this.activeRegion ? 'btn btn-primary':'btn btn-outline-primary'
+}
+-->
+
+<h5>Seleccion la región</h5>
+<div class="botones">
+  <div class="d-flex justify-content-start gap-2 ">
+    <div *ngFor="let region of regiones"
+       >
+      <button
+      (click)="activarRegion( region )"
+       [class]="getClaseCSS ( region ) "
+      >
+            {{region | titlecase}}
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="paises.length > 0" class="row tabla">
+  <div class="col">
+      <app-pais-tabla [paises] = "paises"></app-pais-tabla>
+  </div>
+</div>

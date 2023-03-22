@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
-import { latLngBounds,  LatLngExpression, Map, marker, tileLayer, videoOverlay } from 'leaflet';
+import {  Map, marker, tileLayer } from 'leaflet';
 import { Country } from '../../interfaces/paises-interfaces';
 
 @Component({
@@ -9,19 +9,19 @@ import { Country } from '../../interfaces/paises-interfaces';
 })
 export class MapComponent implements AfterViewInit {
 
-  constructor() { }
-
-
  @Input() pais!: Country;
- zoom: number= 5
-  ngAfterViewInit(): void {
+ zoom: number = 5
+
+ ngAfterViewInit(): void {
     const a = this.pais.latlng[0];
     const b = this.pais.latlng[1];
     const ac= this.pais.capitalInfo.latlng[0];
     const bc= this.pais.capitalInfo.latlng[1];
 
-    if(this.pais.area > 505992) this.zoom = 4
-    if(this.pais.area > 1000000) this.zoom = 3
+    if(this.pais.area < 100000) this.zoom = 7;
+    if(this.pais.area < 10000) this.zoom = 10;
+    if(this.pais.area > 600000) this.zoom = 5
+    if(this.pais.area > 5000000) this.zoom = 4
     const map = new Map("map").setView([a,b], this.zoom);
 
      tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -33,11 +33,6 @@ export class MapComponent implements AfterViewInit {
     .bindPopup(`Capital:<br>${this.pais.capital}`)
     .openPopup();
 
-
-
-
    }
-
-
 
 }

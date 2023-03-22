@@ -17,8 +17,6 @@ import { PaisService } from '../../services/pais.service';
   }
   #map {
     height: 680px;
-
-
   }
   @media(max-width:570px){
   img{
@@ -52,8 +50,6 @@ export class VerPaisComponent implements OnInit {
 
     .subscribe (pais =>{
       this.pais = pais[0]
-      console.log('Desde subscribe ',this.pais)
-
 
     })
 
