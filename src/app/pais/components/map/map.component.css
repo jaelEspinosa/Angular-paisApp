@@ -1,0 +1,14 @@
+#map{
+  margin: 20px 0px 13px 0px;
+
+  height: calc(100vh - 330px);
+  width: 100%;
+  border-radius: 12px;
+  border:1px solid white;
+
+}
+@media(max-width: 380px){
+  #map{
+    margin-bottom: 50px;
+  }
+}

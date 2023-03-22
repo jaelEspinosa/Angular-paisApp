@@ -1,6 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
+
 body{
   background-color: rgb(228, 220, 220);
 }
+
+.tabla{
+  max-height: calc(100vh - 180px);
+  max-width: 100vw;
+  overflow-y: scroll;
+
+}
+@media(max-width: 769px){
+ .tabla{
+   max-height: calc(100vh - 380px);
+ }
+}
+
+.tabla::-webkit-scrollbar{
+  width: 5px;
+  height: 5px;
+}
+
+.tabla::-webkit-scrollbar-thumb{
+  background:#080e0ebd;
+  border-radius: 10px;
+}
+.bandera{
+  display: flex;
+  justify-content: start;
+  gap:30px
+}
+.moneda{
+  display: flex;
+  align-items:baseline;
+  justify-content: center;
+  gap: 5px;
+  font-weight:600;
+
+}
+.info{
+  min-width: 280px;
+  margin: 10px;
+  max-width:300px ;
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 12px;
+
+}
+.translate{
+  padding: 5px;
+  margin: 10px;
+  max-width: 200px;
+  max-height: 300px;
+  border-radius: 12px;
+  border: 1px solid white;
+  font-size: .8rem;
+
+}
+.translate div{
+  border-bottom: 1px solid rgb(168, 159, 159);
+}
+
+@media(max-width:570px){
+  .bandera{
+    flex-direction: column;
+  }
+}
+
+
 

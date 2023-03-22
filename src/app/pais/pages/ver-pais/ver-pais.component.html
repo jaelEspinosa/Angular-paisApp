@@ -1,1 +1,50 @@
-<p>ver-pais works!</p>
+
+
+<div
+   *ngIf="!pais; else divPais"
+   class="alert alert-info">
+   espere por favor...
+</div>
+
+<ng-template #divPais>
+  <div class="row">
+    <div class="col-12">
+           <h1>{{pais.name.official}}</h1>
+    </div>
+    <hr>
+    <div class=" col bandera">
+          <div >
+            <img class="flag shadow-lg" [src]="pais.flags.svg" alt="pais.name.official">
+          </div>
+          <div>
+            <img  class="flag shadow-lg" [src]="pais.coatOfArms.png" alt="pais.name.official">
+          </div>
+      </div>
+      <div class="col translate shadow-lg text-center">
+        <div> {{pais.translations['spa']['official']}}</div>
+        <div> {{pais.translations['deu']['official']}}</div>
+        <div> {{pais.translations['fra']['official']}}</div>
+        <div> {{pais.translations['ita']['official']}}</div>
+        <div> {{pais.translations['tur']['official']}}</div>
+        <div> {{pais.translations['fra']['official']}}</div>
+        <div> {{pais.translations['jpn']['official']}}</div>
+    </div>
+    <div class="col info shadow-lg text-center backimage">
+      <h6>Población: {{pais.population | number}}</h6>
+      <h6>Capital: {{pais.capital}}</h6>
+      <h6>Código: {{pais.cca2}}</h6>
+      <h6>Código FIFA: {{pais.fifa}}</h6>
+      <div class="moneda">
+          <h6>Moneda:</h6>
+          <div *ngFor="let item of pais.currencies | keyvalue">
+                  <span *ngFor="let valor of item.value | keyvalue">
+                    {{valor.value}}
+                  </span>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <app-map [pais]="pais"></app-map>
+  </div>
+</ng-template>
