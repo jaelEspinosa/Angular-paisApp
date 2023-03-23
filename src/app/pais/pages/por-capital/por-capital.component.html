@@ -1,5 +1,5 @@
 
-<h2>Por Capital</h2>
+<h2 class="animate__animated animate__fadeIn animate__faster">Por Capital</h2>
 <hr>
 
 <div class="row">
@@ -13,6 +13,14 @@
 </div>
 
 <hr>
+<ul class="list-group sugerencias">
+  <li *ngFor="let pais of capitalesSugeridas "
+      class="list-group-item list-group-item-action"
+      (click) = "buscar( pais.capital[0] )"
+      >
+    {{pais.capital}}
+  </li>
+</ul>
 <div
      *ngIf="showAlert"
      class="alert alert-danger animate__animated animate__fadeInDown animate__faster shadow-lg">

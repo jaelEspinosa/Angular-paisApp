@@ -2,7 +2,7 @@
 
 <div
    *ngIf="!pais; else divPais"
-   class="alert alert-info">
+   class="alert alert-info animate__animated animate__fadeIn animate__faster">
    espere por favor...
 </div>
 
@@ -12,11 +12,11 @@
            <h1>{{pais.name.official}}</h1>
     </div>
     <hr>
-    <div class=" col bandera">
+    <div class=" col bandera animate__animated animate__fadeIn animate__faster">
           <div >
             <img class="flag shadow-lg" [src]="pais.flags.svg" alt="pais.name.official">
           </div>
-          <div>
+          <div *ngIf="pais.coatOfArms.png">
             <img  class="flag shadow-lg" [src]="pais.coatOfArms.png" alt="pais.name.official">
           </div>
       </div>

@@ -43,21 +43,40 @@ body{
 .info{
   min-width: 280px;
   margin: 10px;
-  max-width:300px ;
+  max-width:200px ;
   border: 1px solid white;
   padding: 10px;
   border-radius: 12px;
-
+  overflow-y: scroll;
 }
+.info::-webkit-scrollbar{
+  width: 5px;
+  height: 5px;
+}
+
+.info::-webkit-scrollbar-thumb{
+  background:#080e0ebd;
+  border-radius: 10px;
+}
+
 .translate{
   padding: 5px;
   margin: 10px;
   max-width: 200px;
-  max-height: 300px;
+  max-height: 180px;
   border-radius: 12px;
   border: 1px solid white;
   font-size: .8rem;
+  overflow-y: scroll;
+}
+.translate::-webkit-scrollbar{
+  width: 5px;
+  height: 5px;
+}
 
+.translate::-webkit-scrollbar-thumb{
+  background:#080e0ebd;
+  border-radius: 10px;
 }
 .translate div{
   border-bottom: 1px solid rgb(168, 159, 159);

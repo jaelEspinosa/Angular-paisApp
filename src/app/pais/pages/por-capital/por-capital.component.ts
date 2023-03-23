@@ -6,19 +6,39 @@ import { PaisService } from '../../services/pais.service';
   selector: 'app-por-capital',
   templateUrl: './por-capital.component.html',
   styles: [
-  ]
+    `
+    li{
+      cursor:pointer;
+    }
+    .sugerencias{
+      max-height: 300px;
+      overflow-y: scroll;
+    }
+    .sugerencias::-webkit-scrollbar{
+      width: 5px;
+      height: 5px;
+}
+
+    .sugerencias::-webkit-scrollbar-thumb{
+      background:#080e0ebd;
+      border-radius: 10px;
+    }
+    ` ]
 })
+
 export class PorCapitalComponent  {
 
   termino:string = '';
   showAlert: boolean = false;
   paises: Country[] = []
+  capitalesSugeridas : Country[] = []
 
 
   constructor(private paisService: PaisService) { }
 
   buscar( event: string ) {
    this.showAlert = false;
+   this.capitalesSugeridas = [];
 
   if(event){
       this.termino = event
@@ -36,9 +56,14 @@ export class PorCapitalComponent  {
 
     }
   }
-sugerencias( termino: string ){
-  this.showAlert = false
-  console.log('mostrando sugerencias..')
-  //todo: crear sugerencias
+sugerencias( capital: string ){
+  this.showAlert = false;
+  this.paisService.buscarPaisPorCapital( capital )
+    .subscribe({
+      next: capitales => this.capitalesSugeridas = capitales,
+      error: error => this.capitalesSugeridas = []
+    })
+
+
 }
 }

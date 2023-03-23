@@ -1,6 +1,6 @@
 
 
-<h2>Por Pais</h2>
+<h2 class="animate__animated animate__fadeIn animate__faster">Por Pais</h2>
 <hr>
 
 <div class="row">
@@ -14,6 +14,14 @@
 </div>
 
 <hr>
+<ul class="list-group sugerencias">
+  <li *ngFor="let pais of paisesSugeridos "
+      class="list-group-item list-group-item-action"
+      (click) = "buscarPais( pais.name.common)"
+      >
+    {{pais.name.common}}
+  </li>
+</ul>
 <div
      *ngIf="showAlert"
      class="alert alert-danger animate__animated animate__fadeInDown animate__faster shadow-lg">

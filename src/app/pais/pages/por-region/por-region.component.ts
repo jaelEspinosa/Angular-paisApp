@@ -25,7 +25,10 @@ getClaseCSS (region: string){
 }
 
 activarRegion( region: string ){
+if (region === this.activeRegion) return;
+
 this.activeRegion = region
+this.paises = []
 
 this.paisService.buscarPaisPorRegion( region )
   .subscribe({
