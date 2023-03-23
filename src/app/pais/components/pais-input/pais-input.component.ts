@@ -19,7 +19,7 @@ debouncer: Subject<string> = new Subject();
 ngOnInit() {
   this.debouncer
   .pipe(
-    debounceTime(500)
+    debounceTime(200)
   )
   .subscribe( valor => {
     this.onDebounce.emit( valor )
