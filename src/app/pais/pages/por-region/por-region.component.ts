@@ -7,8 +7,14 @@ import { PaisService } from '../../services/pais.service';
   templateUrl: './por-region.component.html',
   styles: [
      `
-    .botones{
-      margin-bottom: 15px;
+
+    @media(max-width:378px){
+      .botones{
+        padding-bottom:10px;
+        margin-bottom: 15px;
+        max-width:100%;
+        overflow-x:scroll;
+      }
     }
     `
   ]

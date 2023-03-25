@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input } from '@angular/core';
+import { Component, AfterViewInit, Input, ChangeDetectorRef } from '@angular/core';
 import {  Map, marker, tileLayer } from 'leaflet';
 import { Country } from '../../interfaces/paises-interfaces';
 
@@ -9,10 +9,17 @@ import { Country } from '../../interfaces/paises-interfaces';
 })
 export class MapComponent implements AfterViewInit {
 
+constructor( private cd: ChangeDetectorRef) {}
+
  @Input() pais!: Country;
+ opacity: number= 0.5;
+
  zoom: number = 5
  latlng: number[] = [];
  latlngCap: number[] = [];
+
+
+
 
  ngAfterViewInit(): void {
 
@@ -28,7 +35,12 @@ export class MapComponent implements AfterViewInit {
     const map = new Map("map").setView([this.latlng[0],this.latlng[1]], this.zoom);
 
 
+     tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+     }).addTo(map);
+
      tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+     opacity:this.opacity,
      maxZoom: 19,
      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
      }).addTo(map);

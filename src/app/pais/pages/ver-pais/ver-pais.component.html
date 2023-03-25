@@ -19,7 +19,9 @@
           <div *ngIf="pais.coatOfArms.png">
             <img  class="flag shadow-lg" [src]="pais.coatOfArms.png" alt="pais.name.official">
           </div>
-      </div>
+
+    </div>
+
       <div class="col translate shadow-lg text-center">
         <div> {{pais.translations['spa']['common']}}</div>
         <div> {{pais.translations['deu']['common']}}</div>
@@ -43,8 +45,10 @@
           </div>
       </div>
     </div>
+
   </div>
+
   <div class="row">
-    <app-map [pais]="pais"></app-map>
+    <app-map [pais]="pais" ></app-map>
   </div>
 </ng-template>

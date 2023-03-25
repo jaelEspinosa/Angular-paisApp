@@ -33,8 +33,11 @@ export class VerPaisComponent implements OnInit {
   pais!: Country;
   moneda: any;
 
+
   showAlert: boolean = false
   constructor(private activatedRoute: ActivatedRoute, private paisService: PaisService) { }
+
+
 
   ngOnInit(): void {
 

@@ -28,10 +28,20 @@ body{
   border-radius: 10px;
 }
 .bandera{
+  position:relative;
   display: flex;
+  flex-direction: row;
   justify-content: start;
-  gap:30px
+  gap:30px;
+
+
 }
+@media(max-width:576px){
+  .bandera{
+    position:initial;
+  }
+}
+
 .moneda{
   display: flex;
   align-items:baseline;
