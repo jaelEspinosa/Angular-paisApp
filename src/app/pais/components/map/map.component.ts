@@ -74,8 +74,8 @@ constructor( private cd: ChangeDetectorRef) {}
 
   }
   dark(){
-    this.tileLayer = 'https://mapas.igme.es/gis/services/BasesDatos/IGME_QAFI/MapServer/WMSServer?'
-    tileLayer.wms(this.tileLayer, {
+    this.tileLayer = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
+    tileLayer(this.tileLayer, {
       opacity:1,
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
