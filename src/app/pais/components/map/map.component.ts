@@ -28,6 +28,7 @@ constructor( private cd: ChangeDetectorRef) {}
 /* attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' */
 /*'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}.png' */
 
+/* https://mapas.igme.es/gis/services/BasesDatos/IGME_QAFI/MapServer/WMSServer? */
  ngAfterViewInit(): void {
 
 
@@ -73,7 +74,7 @@ constructor( private cd: ChangeDetectorRef) {}
 
   }
   dark(){
-    this.tileLayer = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}.png'
+    this.tileLayer = 'https://mapas.igme.es/gis/services/BasesDatos/IGME_QAFI/MapServer/WMSServer?'
     tileLayer(this.tileLayer, {
       opacity:1,
       maxZoom: 19,
