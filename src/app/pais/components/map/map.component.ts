@@ -75,7 +75,7 @@ constructor( private cd: ChangeDetectorRef) {}
   }
   dark(){
     this.tileLayer = 'https://mapas.igme.es/gis/services/BasesDatos/IGME_QAFI/MapServer/WMSServer?'
-    tileLayer(this.tileLayer, {
+    tileLayer.wms(this.tileLayer, {
       opacity:1,
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
