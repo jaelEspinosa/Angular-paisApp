@@ -2,26 +2,21 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
 
-## Development server
+## Proceso para automatizar en build para githubPages(package.json):
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- crear el script : "build:href":"ng build --base-href ./"
+- instalar: npm install del-cli --save-dev
+- instalar: npm install copyfiles --save-dev
+- Agregar estos cos sripts al package.json:
+    - "delete:docs": "del docs",
+    - "copy:dist":"copyfiles dist/*/* ./docs -f"
+- Por ultimo creamos el siguiente sript:
+    - "build:github":"npm run delete:docs && npm run build:href && npm run copy:dist"
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Ejecutar el sript 'npm run build:github'.
+    
+```
+ De esta manera tenemos automatizado el proceso, nos genera un build con la base url './' nos borra el archivo,
+ 'docs' que podria existir previamente y nos copia el nuevo build generado el la una carpeta nueva 'docs'. Ya solo
+ queda hacer push en nuestro repositorio y listo, ya estaria actualizado el despliegue en githubPages. 
+```
