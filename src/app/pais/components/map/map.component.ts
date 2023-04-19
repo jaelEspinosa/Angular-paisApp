@@ -75,7 +75,7 @@ constructor( private cd: ChangeDetectorRef) {}
 
   }
   dark(){
-    this.tileLayer = 'https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token={accessToken}'
+    this.tileLayer = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}.png'
     tileLayer(this.tileLayer, {
       opacity:1,
       maxZoom: 19,
