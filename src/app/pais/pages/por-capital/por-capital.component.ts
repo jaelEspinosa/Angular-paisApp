@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Country } from '../../interfaces/paises-interfaces';
+import { Country } from '../../interfaces';
 import { PaisService } from '../../services/pais.service';
-import { log } from 'console';
+
 
 @Component({
   selector: 'app-por-capital',

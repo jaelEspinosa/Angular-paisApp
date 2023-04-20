@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Country } from '../../interfaces/paises-interfaces';
+import { Country } from '../../interfaces';
 import { PaisService } from '../../services/pais.service';
 
 @Component({

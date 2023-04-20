@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, delay, tap } from 'rxjs';
-import { Country } from '../interfaces/paises-interfaces';
-import { CacheStore } from '../interfaces/cache-store';
-import { Region } from '../interfaces/region-type';
+import { Observable, tap } from 'rxjs';
+import { Country, CacheStore, Region } from '../interfaces';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,20 +26,35 @@ export class PaisService {
 
   private getCountriesRequest( url:string ): Observable<Country[]> {
       return this.http.get<Country[]>( url, { params: this.httpParams } )
+  }
+
+  constructor(private http:HttpClient) {
+    this.loadFromLocalStorage()
+   }
+
+
+
+  private saveToLocalStorage() {
+    localStorage.setItem('cachestore', JSON.stringify(this.cacheStore))
+  }
+
+  private loadFromLocalStorage() {
+
+    if(!localStorage.getItem('cachestore')) return;
+
+   this.cacheStore = JSON.parse(localStorage.getItem('cachestore')!)
 
 
   }
-
-  constructor(private http:HttpClient) { }
 
   buscarPais( term: string): Observable<Country[]>{
 
     const url = `${this.apiUrl}/translation/${term}`;
     return this.getCountriesRequest( url )
     .pipe(
-      tap( countries => this.cacheStore.porPais = { term, countries})
-
-   );
+      tap( countries =>this.cacheStore.porPais = { term, countries}),
+      tap( ()=> this.saveToLocalStorage())
+    );
   }
 
   buscarPaisPorCapital( term: string ): Observable<Country[]>{
@@ -47,8 +62,8 @@ export class PaisService {
    const url = `${this.apiUrl}/capital/${term}`
    return this.getCountriesRequest( url )
      .pipe(
-        tap( countries => this.cacheStore.porCapital = { term, countries})
-
+        tap( countries =>this.cacheStore.porCapital = { term, countries}),
+        tap( ()=> this.saveToLocalStorage())
      );
   }
 
@@ -63,8 +78,8 @@ export class PaisService {
     const url = `${this.apiUrl}/region/${region}`
     return this.getCountriesRequest( url )
     .pipe(
-      tap( countries => this.cacheStore.porRegion = { region, countries })
-
+      tap( countries => this.cacheStore.porRegion = { region, countries }),
+      tap( ()=> this.saveToLocalStorage())
    );
   }
 }

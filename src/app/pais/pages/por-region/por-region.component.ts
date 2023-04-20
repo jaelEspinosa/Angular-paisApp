@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Country } from '../../interfaces/paises-interfaces';
+import { Country, Region } from '../../interfaces';
 import { PaisService } from '../../services/pais.service';
-import { Region } from '../../interfaces/region-type';
 
-//Todo hacer persistente la seleccion;
 
 @Component({
   selector: 'app-por-region',
