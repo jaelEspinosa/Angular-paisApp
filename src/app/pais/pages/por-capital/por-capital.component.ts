@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Country } from '../../interfaces/paises-interfaces';
 import { PaisService } from '../../services/pais.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-por-capital',
@@ -26,44 +27,64 @@ import { PaisService } from '../../services/pais.service';
     ` ]
 })
 
-export class PorCapitalComponent  {
+export class PorCapitalComponent implements OnInit {
 
-  termino:string = '';
-  showAlert: boolean = false;
-  paises: Country[] = []
-  capitalesSugeridas : Country[] = []
+  public termino:string = '';
+  public showAlert: boolean = false;
+  public paises: Country[] = []
+  public capitalesSugeridas : Country[] = []
+  public isLoading: boolean = false
+  public initialValue: string = '';
+
 
 
   constructor(private paisService: PaisService) { }
 
+  ngOnInit() {
+
+    this.paises = this.paisService.cacheStore.porCapital.countries;
+    this.initialValue = this.paisService.cacheStore.porCapital.term;
+  }
+
   buscar( event: string ) {
    this.showAlert = false;
    this.capitalesSugeridas = [];
-
+   this.isLoading = true
   if(event){
       this.termino = event
       this.paisService.buscarPaisPorCapital( event )
         .subscribe({
           next: (paises) =>{
             this.paises = paises;
-
+            this.isLoading = false;
           },
           error: (error) =>{
             this.paises = []
             this.showAlert = true
+            this.isLoading = false
+            console.log('ha sucedido un errorcito ', error);
+
           }
         })
 
     }
   }
+
 sugerencias( capital: string ){
+  this.isLoading = true;
   this.showAlert = false;
   this.paisService.buscarPaisPorCapital( capital )
     .subscribe({
-      next: capitales => this.capitalesSugeridas = capitales,
-      error: error => this.capitalesSugeridas = []
-    })
+      next: capitales => {
+        this.capitalesSugeridas = capitales
+        this.isLoading = false;
 
+      },
+      error: error => {
+        this.capitalesSugeridas = []
+        this.isLoading = false;
+      }
+    })
 
 }
 }

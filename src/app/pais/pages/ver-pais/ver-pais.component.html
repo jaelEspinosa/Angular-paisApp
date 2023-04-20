@@ -9,7 +9,7 @@
 <ng-template #divPais>
   <div class="row">
     <div class="col-12">
-           <h1>{{pais.name.official}}</h1>
+           <h2>{{pais.name.official}}</h2>
     </div>
     <hr>
     <div class=" col bandera animate__animated animate__fadeIn animate__faster">
@@ -47,7 +47,7 @@
     </div>
 
   </div>
-
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <div class="row">
     <app-map [pais]="pais" ></app-map>
   </div>

@@ -9,6 +9,7 @@
             (onDebounce)="sugerencias($event)"
             (onEnter)="buscar($event)"
             placeHolder = "Bucar País..."
+            [initialValue]="initialValue"
             ></app-pais-input>
   </div>
 </div>
@@ -27,6 +28,7 @@
      class="alert alert-danger animate__animated animate__fadeInDown animate__faster shadow-lg">
      No se encontró nada con el termino <strong>"{{termino}}"</strong>
 </div>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 <div *ngIf="paises.length > 0" class="row tabla">
   <div class="col">
       <app-pais-tabla [paises] = "paises"></app-pais-tabla>

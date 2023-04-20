@@ -10,6 +10,7 @@ import { VerPaisComponent } from './pages/ver-pais/ver-pais.component';
 import { PaisTablaComponent } from './components/pais-tabla/pais-tabla.component';
 import { PaisInputComponent } from './components/pais-input/pais-input.component';
 import { MapComponent } from './components/map/map.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -39,6 +40,7 @@ import { MapComponent } from './components/map/map.component';
     CommonModule,
     FormsModule,
     RouterModule,
+    SharedModule
   ],
 })
 export class PaisModule { }

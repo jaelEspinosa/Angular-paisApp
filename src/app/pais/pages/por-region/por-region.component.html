@@ -37,6 +37,7 @@ y esta manera es definitivamente la mas limpia y corta:
     </div>
   </div>
 </div>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 <div *ngIf="paises.length > 0" class="row tabla">
   <div class="col">
       <app-pais-tabla [paises] = "paises"></app-pais-tabla>

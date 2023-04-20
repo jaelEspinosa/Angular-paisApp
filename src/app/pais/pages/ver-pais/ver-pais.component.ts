@@ -29,24 +29,24 @@ import { log } from 'console';
   ]
 })
 export class VerPaisComponent implements OnInit {
-  pais!: Country;
-  moneda: any;
-  showAlert: boolean = false
+  public pais!: Country;
+  public moneda: any;
+  public showAlert: boolean = false;
+  public isLoading: boolean = false;
+
   constructor(private activatedRoute: ActivatedRoute, private paisService: PaisService) { }
 
   ngOnInit(): void {
-
+  this.isLoading= true;
   this.activatedRoute.params
     .pipe(
       switchMap(({ id }) => this.paisService.buscarPaisPorCodigo( id )),
       tap(resp=>console.log('tap ',resp ))
     )
-
-
     .subscribe (pais =>{
       this.pais = pais[0]
       console.log(this.pais);
-
+      this.isLoading = false;
     })
 
   }

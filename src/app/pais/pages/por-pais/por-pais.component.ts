@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Country } from '../../interfaces/paises-interfaces';
 import { PaisService } from '../../services/pais.service';
 
@@ -31,18 +31,25 @@ import { PaisService } from '../../services/pais.service';
   `
   ]
 })
-export class PorPaisComponent  {
+export class PorPaisComponent implements OnInit {
 
-  termino  : string = '';
-  showAlert: boolean = false;
-  paises   : Country[] = []
-
-  paisesSugeridos: Country[] = []
+  public termino  : string = '';
+  public showAlert: boolean = false;
+  public paises   : Country[] = [];
+  public isLoading : boolean = false;
+  public initialValue: string = '';
+  public paisesSugeridos: Country[] = [];
 
 
   constructor(private paisService: PaisService) { }
 
+  ngOnInit() {
+    this.paises = this.paisService.cacheStore.porPais.countries;
+    this.initialValue = this.paisService.cacheStore.porPais.term;
+  }
+
   buscar( event: string ) {
+   this.isLoading = true;
    this.showAlert = false;
    this.paisesSugeridos = []
   if(event){
@@ -52,27 +59,41 @@ export class PorPaisComponent  {
           next: paises => this.paises = paises,
           error: error => {
             this.paises = []
-            this.showAlert = true
+            this.showAlert = true;
+            this.isLoading = false;
           }
         })
+        this.isLoading = false;
     }
   }
 sugerencias( termino: string ){
+  this.isLoading = true;
   this.showAlert = false
-
+  this.paises = [];
   this.paisService.buscarPais( termino )
          .subscribe({
-          next: paises => this.paisesSugeridos = paises,
-          error: error => this.paisesSugeridos = []
+          next: paises => {
+            this.paisesSugeridos = paises
+            this.isLoading=false;
+          },
+          error: error => {
+            this.paisesSugeridos = []
+            this.isLoading=false;
+          }
          })
+
 }
 
 buscarPais( pais: string ){
+  this.isLoading = true
   this.paisesSugeridos = []
   this.paises = []
   this.paisService.buscarPais( pais )
-    .subscribe( paises => this.paises = paises)
-}
+    .subscribe( paises => {
+      this.paises = paises
+      this.isLoading = false;
+    })
+  }
 
 
 }

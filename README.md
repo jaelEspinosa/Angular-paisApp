@@ -8,9 +8,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - instalar: npm install del-cli --save-dev
 - instalar: npm install copyfiles --save-dev
 - Agregar estos cos sripts al package.json:
+
     - "delete:docs": "del docs",
     - "copy:dist":"copyfiles dist/*/* ./docs -f"
+    
 - Por ultimo creamos el siguiente sript:
+
     - "build:github":"npm run delete:docs && npm run build:href && npm run copy:dist"
 
 - Ejecutar el sript 'npm run build:github'.
