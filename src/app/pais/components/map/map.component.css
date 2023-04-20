@@ -15,8 +15,8 @@
     left:0px;
     right: 0px;
     margin:auto;
-    height: calc(100vh - 295px);
-    width: 99vw;
+    height: calc(100vh - 310px);
+    width: 80vw;
     border-radius: 12px;
     border:1px solid white;
     z-index:-100;

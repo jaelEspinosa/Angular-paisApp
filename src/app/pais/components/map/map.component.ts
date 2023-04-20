@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, Input, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import {  Map, marker, tileLayer } from 'leaflet';
 import { Country } from '../../interfaces/paises-interfaces';
+import { log } from 'console';
 
 @Component({
   selector: 'app-map',
@@ -17,10 +18,13 @@ constructor( private cd: ChangeDetectorRef) {}
 
  opacity: number= 0.5;
 
- zoom: number = 5
- latlng: number[] = [];
- latlngCap: number[] = [];
- tileLayer: string= 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+ public zoom: number = 5
+ public latlng: number[] = [];
+ public latlngCap: number[] = [];
+ public tileLayer: string= 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+
+ public satellite: boolean = false
+ public dark: boolean = false
 
 /* 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' */
 
@@ -30,7 +34,9 @@ constructor( private cd: ChangeDetectorRef) {}
 /*'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' */
 
 /* https://mapas.igme.es/gis/services/BasesDatos/IGME_QAFI/MapServer/WMSServer? */
- ngAfterViewInit(): void {
+
+
+ngAfterViewInit(): void {
 
 
     this.latlng = this.pais.latlng;
@@ -46,7 +52,7 @@ constructor( private cd: ChangeDetectorRef) {}
 
 
      tileLayer(this.tileLayer, {
-     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+     attribution: 'Tiles &copy; Esri &mdash; Source: User Community'
      }).addTo(this.map);
 
 
@@ -60,28 +66,47 @@ constructor( private cd: ChangeDetectorRef) {}
 
    }
 
-   cambiarVista(){
-    if (this.tileLayer !== 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'){
-      this.tileLayer = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-    }else{
-      this.tileLayer = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
-    }
-    tileLayer(this.tileLayer, {
-      opacity:1,
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+ cambiarVista(){
 
-    }).addTo(this.map)
+    this.satellite = !this.satellite
+    this.dark=false
+    if (this.satellite) {
+      this.tileLayer = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+      tileLayer(this.tileLayer, {
+        opacity:1,
+        maxZoom: 19,
+      }).addTo(this.map)
+    } else {
+
+      this.tileLayer = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+      tileLayer(this.tileLayer, {
+        opacity:1,
+        maxZoom: 19,
+      }).addTo(this.map)
+    }
+
 
   }
-  dark(){
-    this.tileLayer = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}.png'
-    tileLayer(this.tileLayer, {
-      opacity:1,
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  onDark(){
+    this.dark = !this.dark
+    this.satellite = false
+    if (this.dark) {
+      this.tileLayer = 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}.png'
+      tileLayer(this.tileLayer, {
+        opacity:1,
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(this.map)
 
-    }).addTo(this.map)
+    }else {
+
+      this.tileLayer = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+      tileLayer(this.tileLayer, {
+        opacity:1,
+        maxZoom: 19,
+      }).addTo(this.map)
+    }
+
   }
 
 }

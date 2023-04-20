@@ -5,8 +5,13 @@
 
   <div id="map" class="shadow-lg">
 
-    <button (click)="cambiarVista()" class="btn btn-sm btn-info shadow vista">Capa</button>
-    <button (click)="dark()" class="btn btn-sm btn-info shadow vista2">dark</button>
+    <button (click)="cambiarVista()"
+            class="btn btn-sm btn-info shadow vista">{{satellite ? 'Mapa':'Satelite'}}</button>
+    <button (click)="onDark()"
+            [class]=" dark ? 'btn-sm btn btn-info shadow vista2':'btn btn-sm btn-dark shadow vista2'"
+    >
+
+            {{dark ? 'Claro':'Oscuro'}}</button>
 
   </div>
 
